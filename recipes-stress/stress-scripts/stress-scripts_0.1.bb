@@ -15,7 +15,7 @@ do_install() {
 	install -m 0644 ${WORKDIR}/runner.py ${D}${ROOT_HOME}/stress_scripts/runner.py
 }
 
-RDEPENDS:${PN} = "iperf3 fio stress-ng glmark2"
+RDEPENDS:${PN} = "iperf3 fio stress-ng glmark2 sysstat"
 
 FILES:${PN} = " \
 	${ROOT_HOME}/stress_scripts/start.py \

@@ -184,6 +184,12 @@ def launch_test():
 
     return True
 
+def launch_collector():
+    log('Start collecting data...')
+    cmd = 'sar -o sar.data 5'.split(' ')
+    s = Runner('sar', cmd, LOG_DIR, cwd=LOG_DIR)
+    s.start()
+    runners.append(s)
 
 def cleanup():
     for s in runners:
@@ -211,6 +217,8 @@ if __name__ == '__main__':
 
     if not launch_test():
         sys.exit(1)
+
+    launch_collector()
 
     start = time.perf_counter()
     try:
