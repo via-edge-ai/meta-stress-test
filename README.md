@@ -8,9 +8,9 @@ variety of MediaTek platforms. The layer contains following:
 * Additional packages needed, but not included in default AIoT Linux
   configuration.
 
-The layer has been verified on following platforms:
+The layer has been verified on following boards:
 
-* i1200
+* i1200-demo
 
 ## Dependencies
 
