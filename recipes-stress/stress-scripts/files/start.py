@@ -90,6 +90,7 @@ def is_nfs_mounted():
 
 def mount_nfs():
     if is_nfs_mounted():
+        log('NFS folder already mounted')
         return True
 
     if not os.path.exists(NFS_MOUNT):
@@ -186,7 +187,8 @@ def launch_test():
 
 def launch_collector():
     log('Start collecting data...')
-    cmd = 'sar -o sar.data 5'.split(' ')
+    timestamp = datetime.datetime.now().strftime('%y%m%d%H%M%S')
+    cmd = ('sar -o sar_%s.data 5' % timestamp).split(' ')
     s = Runner('sar', cmd, LOG_DIR, cwd=LOG_DIR)
     s.start()
     runners.append(s)

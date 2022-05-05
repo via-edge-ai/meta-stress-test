@@ -23,6 +23,7 @@ def mount(d):
 def mount_all(disks):
     for d in disks:
         if is_mounted(disks[d]):
+            print('%s mounted' % d)
             continue
 
         print('Mounting %s (%s => %s)' % (d, disks[d]['dev'], disks[d]['dir']))
