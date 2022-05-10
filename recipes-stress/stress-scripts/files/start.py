@@ -39,7 +39,7 @@ stressors = {
         'cmd': 'stress-ng --vm 2 --vm-bytes %s' % MEM_SIZE,
     },
     'ethernet': {
-        'cmd': 'iperf3 -c %s -u -b 20M -t %d' % (IPERF_SERVER, MAX_DUR),
+        'cmd': 'iperf3 -c %s -u -b %s -t %d' % (IPERF_SERVER, IPERF_BANDWIDTH, MAX_DUR),
     },
     'gpu': {
         'cmd': 'glmark2-es2-wayland',
