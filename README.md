@@ -24,7 +24,7 @@ This layer depends on following layers:
 Suppose that we have a RITY building environment, clone the repository under
 `src` folder:
 
-    git clone https://gitlab.com/mediatek/aiot/team-mtk-aiot-sw-ss2/meta-stress-test <RITY_PROJECT>/src/meta-stress-test
+    git clone https://gitlab.com/mediatek/aiot/rity/meta-stress-test <RITY_PROJECT>/src/meta-stress-test
 
 Run following command to add this layer to BitBake building environment
 
