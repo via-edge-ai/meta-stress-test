@@ -132,7 +132,7 @@ def add_disk_stress(disks):
             log('Available size for testing is too small (%d)' % test_cap)
             return False
 
-        nfiles = test_cap / FILE_SIZE 
+        nfiles = test_cap / FILE_SIZE
         testdir = os.path.join(d['dir'], 'fio_test')
         cmd += ' --name job%d --directory %s --size %dMB --nrfiles %d' % (job_nr, testdir, test_cap / 1024 / 1024, nfiles)
 
