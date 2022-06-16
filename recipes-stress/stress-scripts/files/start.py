@@ -193,6 +193,11 @@ def launch_collector():
     s.start()
     runners.append(s)
 
+    cmd = ('python3 read_temp.py %s/temp_%s.csv' % (LOG_DIR, timestamp)).split(' ')
+    s = Runner('temp', cmd, LOG_DIR)
+    s.start()
+    runners.append(s)
+
 def cleanup():
     for s in runners:
         s.stop()

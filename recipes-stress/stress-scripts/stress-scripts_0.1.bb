@@ -4,7 +4,8 @@ LIC_FILES_CHKSUM = "file://${COREBASE}/meta/COPYING.MIT;md5=3da9cfbcb788c80a0384
 
 SRC_URI = "file://start.py \
            file://disk.py \
-           file://runner.py"
+           file://runner.py \
+           file://read_temp.py"
 
 S = "${WORKDIR}"
 
@@ -13,6 +14,7 @@ do_install() {
 	install -m 0755 ${WORKDIR}/start.py ${D}${ROOT_HOME}/stress_scripts/start.py
 	install -m 0644 ${WORKDIR}/disk.py ${D}${ROOT_HOME}/stress_scripts/disk.py
 	install -m 0644 ${WORKDIR}/runner.py ${D}${ROOT_HOME}/stress_scripts/runner.py
+	install -m 0755 ${WORKDIR}/read_temp.py ${D}${ROOT_HOME}/stress_scripts/read_temp.py
 }
 
 RDEPENDS:${PN} = "iperf3 fio stress-ng glmark2 sysstat"
@@ -21,5 +23,6 @@ FILES:${PN} = " \
 	${ROOT_HOME}/stress_scripts/start.py \
 	${ROOT_HOME}/stress_scripts/disk.py \
 	${ROOT_HOME}/stress_scripts/runner.py \
+	${ROOT_HOME}/stress_scripts/read_temp.py \
 "
 
