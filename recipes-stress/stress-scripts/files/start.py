@@ -21,6 +21,7 @@ NFS_SERVER = '192.168.221.109:/home/demo/nfsroot'
 NFS_MOUNT = '/tmp/nfs'
 IPERF_SERVER = '192.168.221.109'
 IPERF_BANDWIDTH = '20M'
+VIDEO_SAMPLE = '/home/root/HDClub_H264_High@L5.1_3840x2160_29.970fps_15Mbsp_LC-AAC.mp4'
 
 # The total memory used for memory stress test.
 # Adjust the value to fit your environment.
@@ -43,6 +44,13 @@ stressors = {
     },
     'gpu': {
         'cmd': 'glmark2-es2-wayland',
+    },
+    'apu': {
+        'cmd': 'python3 benchmark.py auto',
+        'cwd': '/usr/share/benchmark_dla',
+    },
+    'video': {
+        'cmd': 'gst-launch-1.0 -v filesrc location=%s ! parsebin ! v4l2h264dec ! v4l2convert output-io-mode=dmabuf-import capture-io-mode=dmabuf ! waylandsink' % VIDEO_SAMPLE,
     },
 }
 runners = []
@@ -160,6 +168,10 @@ def setup():
 
     for s in setup_cmds:
         os.system(s)
+
+    if not os.path.exists(VIDEO_SAMPLE):
+        log('No video sample found: %s' % VIDEO_SAMPLE)
+        return False
 
     # Raise max number of open files limitation
     try:

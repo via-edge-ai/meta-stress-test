@@ -17,7 +17,16 @@ do_install() {
 	install -m 0755 ${WORKDIR}/read_temp.py ${D}${ROOT_HOME}/stress_scripts/read_temp.py
 }
 
-RDEPENDS:${PN} = "iperf3 fio stress-ng glmark2 sysstat"
+RDEPENDS:${PN} = " \
+	iperf3 \
+	fio \
+	stress-ng \
+	glmark2 \
+	sysstat \
+	neuropilot-bin \
+	gstreamer1.0-plugins-good-video4linux2 \
+	gstreamer1.0-plugins-base-playback \
+"
 
 FILES:${PN} = " \
 	${ROOT_HOME}/stress_scripts/start.py \
