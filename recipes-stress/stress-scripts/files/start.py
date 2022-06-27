@@ -210,6 +210,11 @@ def launch_collector():
     s.start()
     runners.append(s)
 
+    cmd = ['python3', 'read_oops.py', LOG_DIR]
+    s = Runner('oops', cmd, LOG_DIR)
+    s.start()
+    runners.append(s)
+
 def cleanup():
     for s in runners:
         s.stop()
