@@ -20,7 +20,7 @@ FILE_SIZE = 10 * 1024 * 1024   # 10MB
 NFS_SERVER = '192.168.221.109:/home/demo/nfsroot'
 NFS_MOUNT = '/tmp/nfs'
 IPERF_SERVER = '192.168.221.109'
-IPERF_BANDWIDTH = '20M'
+IPERF_BANDWIDTH = '800M'
 VIDEO_SAMPLE = '/home/root/HDClub_H264_High@L5.1_3840x2160_29.970fps_15Mbsp_LC-AAC.mp4'
 
 # The total memory used for memory stress test.
@@ -129,6 +129,9 @@ def get_disk_caps(path):
 
 def add_disk_stress(disks):
     global stressors
+
+    if len(disks) == 0:
+        return True
 
     cmd = 'fio --time_based --runtime %d' % MAX_DUR
     job_nr = 1
