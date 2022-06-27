@@ -256,6 +256,16 @@ if __name__ == '__main__':
             if temp >= 110000:
                 log('Temperature reaching %d. Force quitting...' % temp)
                 break
+
+            # We should keep memory usage within a maximum sustainable level
+            # If OOM happends, then we should adjust MEM_SIZE and find out
+            # a working value.
+            p = subprocess.run('dmesg | grep -q -i oom', shell=True)
+            if p.returncode == 0:
+                dmesg_log = os.path.join(LOG_DIR, 'dmesg.log')
+                log('OOM detected. Dump dmesg to %s and quit...' % dmesg_log)
+                subprocess.run('dmesg > %s' % dmesg_log, shell=True)
+                break
     except KeyboardInterrupt:
         log('Quit..')
 
