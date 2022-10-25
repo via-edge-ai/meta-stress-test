@@ -4,5 +4,4 @@ RDEPENDS:${PN}:append = " \
 	numactl \
 	sysstat \
 	rt-tests \
-	stress-scripts \
 "
