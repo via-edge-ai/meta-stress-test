@@ -26,9 +26,12 @@ RDEPENDS:${PN} = " \
 	stress-ng \
 	glmark2 \
 	sysstat \
-	neuropilot-bin \
 	gstreamer1.0-plugins-good-video4linux2 \
 	gstreamer1.0-plugins-base-playback \
+"
+
+RDEPENDS:${PN}:append:i1200 = " \
+	neuropilot-bin \
 "
 
 FILES:${PN} = " \
