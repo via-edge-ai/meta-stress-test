@@ -46,7 +46,7 @@ stressors = {
         'cmd': 'glmark2-es2-wayland',
     },
     'apu': {
-        'cmd': 'python3 benchmark.py auto',
+        'cmd': 'python3 benchmark.py --stress',
         'cwd': '/usr/share/benchmark_dla',
     },
     'video': {
