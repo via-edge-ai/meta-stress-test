@@ -64,8 +64,8 @@ setup_cmds = [
 
 disks = {
     'emmc': {
-        'dev': '/dev/mmcblk0p4',
-        'dir': '/home',
+        'dev': '/dev/root',
+        'dir': '/',
     },
     'usb1': {
         'dev': '/dev/sda1',
