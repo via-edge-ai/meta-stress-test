@@ -2,7 +2,8 @@ SUMMARY = "Stress scripts used for burning MTK platforms"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://${COREBASE}/meta/COPYING.MIT;md5=3da9cfbcb788c80a0384361b4de20420"
 
-SRC_URI = "file://start.py \
+SRC_URI = "file://start-i350.py \
+           file://start-i1200.py \
            file://disk.py \
            file://runner.py \
            file://read_temp.py \
@@ -11,9 +12,19 @@ SRC_URI = "file://start.py \
 
 S = "${WORKDIR}"
 
+python() {
+    plat = d.getVar('SOC_FAMILY', True)
+    if plat == 'mt8195':
+        d.setVar('START_SCRIPT', 'start-i1200.py')
+    elif plat == 'mt8365':
+        d.setVar('START_SCRIPT', 'start-i350.py')
+    else:
+        raise ValueError('Invalid SOC: %s' % plat)
+}
+
 do_install() {
 	install -d -m 0755 ${D}${ROOT_HOME}/stress_scripts
-	install -m 0755 ${WORKDIR}/start.py ${D}${ROOT_HOME}/stress_scripts/start.py
+	install -m 0755 ${WORKDIR}/${START_SCRIPT} ${D}${ROOT_HOME}/stress_scripts/start.py
 	install -m 0644 ${WORKDIR}/disk.py ${D}${ROOT_HOME}/stress_scripts/disk.py
 	install -m 0644 ${WORKDIR}/runner.py ${D}${ROOT_HOME}/stress_scripts/runner.py
 	install -m 0755 ${WORKDIR}/read_temp.py ${D}${ROOT_HOME}/stress_scripts/read_temp.py
