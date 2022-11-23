@@ -19,7 +19,8 @@ python() {
     elif plat == 'mt8365':
         d.setVar('START_SCRIPT', 'start-i350.py')
     else:
-        raise ValueError('Invalid SOC: %s' % plat)
+        bb.warn('Unrecognized SOC (%s), use the default script.' % plat)
+        d.setVar('START_SCRIPT', 'start-i1200.py')
 }
 
 do_install() {
