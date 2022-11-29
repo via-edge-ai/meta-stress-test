@@ -42,8 +42,12 @@ RDEPENDS:${PN} = " \
 	gstreamer1.0-plugins-base-playback \
 "
 
+RDEPENDS:${PN}:append:i350 = " \
+	${@bb.utils.contains('TFLITE_PREBUILT', '1', 'tensorflowlite-prebuilt', 'tensorflow-lite', d)} \
+"
+
 RDEPENDS:${PN}:append:i1200 = " \
-	neuropilot-bin \
+	${@bb.utils.contains('DISTRO_FEATURES', 'nda-mtk', 'neuropilot-bin', '', d)} \
 "
 
 FILES:${PN} = " \
