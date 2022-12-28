@@ -47,7 +47,7 @@ RDEPENDS:${PN}:append:i350 = " \
 "
 
 RDEPENDS:${PN}:append:i1200 = " \
-	${@bb.utils.contains('DISTRO_FEATURES', 'nda-mtk', 'neuropilot-bin', '', d)} \
+	${@bb.utils.contains('DISTRO_FEATURES', 'nda-mtk', 'ncc-tflite libneuron', '', d)} \
 "
 
 FILES:${PN} = " \
