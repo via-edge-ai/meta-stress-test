@@ -25,7 +25,7 @@ VIDEO_SAMPLE = '/home/root/HDClub_H264_High@L5.1_3840x2160_29.970fps_15Mbsp_LC-A
 
 # The total memory used for memory stress test.
 # Adjust the value to fit your environment.
-MEM_SIZE = '700M'
+MEM_SIZE = '5000M'
 
 # The ratio of available disk space used for testing.
 # For large disk, smaller value can reduce time needed for test files
