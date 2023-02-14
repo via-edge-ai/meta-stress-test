@@ -7,6 +7,7 @@ import time
 import shutil
 import resource
 import datetime
+import platform
 
 from runner import Runner, RunError
 from disk import mount_all
@@ -25,7 +26,7 @@ VIDEO_SAMPLE = '/home/root/HDClub_H264_High@L5.1_3840x2160_29.970fps_15Mbsp_LC-A
 
 # The total memory used for memory stress test.
 # Adjust the value to fit your environment.
-MEM_SIZE = '700M'
+MEM_SIZE = '5000M'
 
 # The ratio of available disk space used for testing.
 # For large disk, smaller value can reduce time needed for test files
@@ -78,6 +79,14 @@ disks = {
     'sd': {
         'dev': '/dev/mmcblk1p1',
         'dir': '/mnt/sd',
+    },
+}
+
+# For genio-1200-evk, there is extra USB disk
+disks_g1200_evk = {
+    'usb3': {
+        'dev': '/dev/sdc1',
+        'dir': '/mnt/disk3',
     },
 }
 
@@ -159,14 +168,26 @@ def add_disk_stress(disks):
 
     return True
 
+def machine():
+    return platform.node()
+
 def setup():
     if not setup_log_dir():
         return False
 
-    if not mount_all(disks):
+    all_disks = {}
+    for k, v in disks.items():
+        all_disks[k] = v
+
+    if machine() == 'genio-1200-evk':
+        for k, v in disks_g1200_evk.items():
+            if k not in all_disks:
+                all_disks[k] = v
+
+    if not mount_all(all_disks):
         return False
 
-    if not add_disk_stress(disks):
+    if not add_disk_stress(all_disks):
         return False
 
     for s in setup_cmds:
@@ -227,6 +248,12 @@ def cleanup():
         testdir = os.path.join(v['dir'], 'fio_test')
         if os.path.exists(testdir):
             shutil.rmtree(testdir, ignore_errors=True)
+
+    if machine() == 'genio-1200-evk':
+        for k, v in disks_g1200_evk.items():
+            testdir = os.path.join(v['dir'], 'fio_test')
+            if os.path.exists(testdir):
+                shutil.rmtree(testdir, ignore_errors=True)
 
 def read_temp():
     with open('/sys/class/thermal/thermal_zone0/temp') as f:
