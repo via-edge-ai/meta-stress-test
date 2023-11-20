@@ -5,6 +5,7 @@ LIC_FILES_CHKSUM = "file://${COREBASE}/meta/COPYING.MIT;md5=3da9cfbcb788c80a0384
 SRC_URI = "file://start-i350.py \
            file://start-i1200.py \
            file://start-genio-700.py \
+           file://start-genio-510.py \
            file://disk.py \
            file://runner.py \
            file://read_temp.py \
@@ -21,6 +22,8 @@ python() {
         d.setVar('START_SCRIPT', 'start-i350.py')
     elif plat == 'mt8188':
         d.setVar('START_SCRIPT', 'start-genio-700.py')
+    elif plat == 'mt8370':
+        d.setVar('START_SCRIPT', 'start-genio-510.py')
     else:
         bb.warn('Unrecognized SOC (%s), use the default script.' % plat)
         d.setVar('START_SCRIPT', 'start-i1200.py')
@@ -54,6 +57,10 @@ RDEPENDS:${PN}:append:i1200 = " \
 "
 
 RDEPENDS:${PN}:append:genio-700 = " \
+	${@bb.utils.contains('DISTRO_FEATURES', 'nda-mtk', 'ncc-tflite libneuron', '', d)} \
+"
+
+RDEPENDS:${PN}:append:genio-510 = " \
 	${@bb.utils.contains('DISTRO_FEATURES', 'nda-mtk', 'ncc-tflite libneuron', '', d)} \
 "
 
